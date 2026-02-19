@@ -37,6 +37,15 @@ except Exception as e:
     prediction_engine = None
 
 
+# Global metrics tracking
+api_metrics = {
+    'total_predictions': 0,
+    'predictions_since_start': 0,
+    'start_time': datetime.now(),
+    'last_prediction': None
+}
+
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint."""
@@ -46,6 +55,19 @@ def health_check():
         'timestamp': datetime.now().isoformat(),
         'model_loaded': prediction_engine.model is not None,
         'arms_monitored': sensor_pipeline.n_arms if sensor_pipeline else 0
+    }), 200
+
+
+@app.route('/metrics', methods=['GET'])
+def get_metrics():
+    """Get API usage metrics."""
+    uptime = datetime.now() - api_metrics['start_time']
+    return jsonify({
+        'uptime_seconds': uptime.total_seconds(),
+        'total_predictions': api_metrics['total_predictions'],
+        'predictions_since_start': api_metrics['predictions_since_start'],
+        'last_prediction_time': api_metrics['last_prediction'].isoformat() if api_metrics['last_prediction'] else None,
+        'average_predictions_per_hour': api_metrics['predictions_since_start'] / max(uptime.total_seconds() / 3600, 1)
     }), 200
 
 
@@ -94,6 +116,11 @@ def predict_arm_failure():
             current_features=features,
             trends=trends
         )
+        
+        # Update metrics
+        api_metrics['total_predictions'] += 1
+        api_metrics['predictions_since_start'] += 1
+        api_metrics['last_prediction'] = datetime.now()
         
         return jsonify(health_assessment), 200
     
@@ -156,6 +183,11 @@ def predict_batch_fleet():
         
         # Get alerts
         alerts = prediction_engine.get_failure_alerts(assessments)
+        
+        # Update metrics
+        api_metrics['total_predictions'] += len(arms)
+        api_metrics['predictions_since_start'] += len(arms)
+        api_metrics['last_prediction'] = datetime.now()
         
         return jsonify({
             'timestamp': datetime.now().isoformat(),
