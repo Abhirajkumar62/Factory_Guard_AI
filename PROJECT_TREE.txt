@@ -1,0 +1,280 @@
+PROJECT_TREE.txt - Complete Directory Structure
+================================================
+
+Factory_Guard_AI/
+│
+├── 📂 .github/
+│   └── workflows/
+│       └── pipeline.yml                    [GitHub Actions CI/CD]
+│
+├── 📂 config/
+│   └── config.yaml                        [Main configuration file]
+│
+├── 📂 data/
+│   ├── raw/
+│   │   └── .gitkeep                       [Raw data directory]
+│   └── processed/
+│       └── .gitkeep                       [Processed data directory]
+│
+├── 📂 models/
+│   └── .gitkeep                           [Trained model artifacts]
+│
+├── 📂 mlruns/                             [MLflow experiment tracking]
+│
+├── 📂 notebooks/
+│   ├── 01_EDA_Analysis.ipynb              [Data exploration notebook]
+│   └── 02_Model_Training.ipynb            [Model training notebook]
+│
+├── 📂 src/
+│   │
+│   ├── __init__.py                        [Package initialization]
+│   │
+│   ├── 📂 data/
+│   │   ├── __init__.py
+│   │   ├── loader.py                      [DataLoader class]
+│   │   │   ├─ DataLoader
+│   │   │   │  ├─ load_csv()
+│   │   │   │  ├─ handle_missing_values()
+│   │   │   │  ├─ remove_duplicates()
+│   │   │   │  ├─ train_test_split()
+│   │   │   │  └─ _init_spark()
+│   │   │
+│   │   └── preprocessing.py               [Preprocessor class]
+│   │       ├─ Preprocessor
+│   │       │  ├─ fit_transform()
+│   │       │  ├─ transform()
+│   │       │  └─ remove_outliers()
+│   │
+│   ├── 📂 features/
+│   │   ├── __init__.py
+│   │   └── engineer.py                    [FeatureEngineer class]
+│   │       ├─ FeatureEngineer
+│   │       │  ├─ create_polynomial_features()
+│   │       │  ├─ select_features_by_correlation()
+│   │       │  ├─ select_features_by_importance()
+│   │       │  └─ create_interaction_features()
+│   │
+│   ├── 📂 models/
+│   │   ├── __init__.py
+│   │   └── trainer.py                     [ModelTrainer class]
+│   │       ├─ ModelTrainer
+│   │       │  ├─ train()
+│   │       │  ├─ predict()
+│   │       │  ├─ predict_proba()
+│   │       │  ├─ evaluate()
+│   │       │  ├─ save_model()
+│   │       │  ├─ load_model()
+│   │       │  └─ _initialize_model()
+│   │       │     ├─ Logistic Regression
+│   │       │     ├─ SVM
+│   │       │     ├─ Random Forest
+│   │       │     ├─ XGBoost
+│   │       │     ├─ LightGBM
+│   │       │     └─ Neural Networks
+│   │
+│   └── 📂 utils/
+│       ├── __init__.py
+│       ├── config.py                      [ConfigLoader & Logger]
+│       │   ├─ ConfigLoader
+│       │   │  ├─ _load_config()
+│       │   │  ├─ get()
+│       │   │  └─ to_dict()
+│       │   └─ Logger
+│       │      ├─ info()
+│       │      ├─ warning()
+│       │      └─ error()
+│       │
+│       └── mlflow_tracker.py              [MLflow integration]
+│           └─ MLflowTracker
+│              ├─ start_run()
+│              ├─ log_params()
+│              ├─ log_metrics()
+│              ├─ log_model()
+│              ├─ log_artifact()
+│              ├─ end_run()
+│              └─ get_best_run()
+│
+├── 📂 tests/
+│   ├── conftest.py                        [Pytest configuration]
+│   ├── test_data.py                       [Data module tests]
+│   │   ├─ TestDataLoader
+│   │   │  ├─ test_load_csv()
+│   │   │  ├─ test_handle_missing_values()
+│   │   │  └─ test_remove_duplicates()
+│   │   └─ TestPreprocessor
+│   │      ├─ test_fit_transform()
+│   │      └─ test_remove_outliers()
+│   │
+│   └── test_features.py                   [Feature module tests]
+│       └─ TestFeatureEngineer
+│          ├─ test_create_polynomial_features()
+│          ├─ test_select_features_by_correlation()
+│          └─ test_create_interaction_features()
+│
+├── 📄 .env.example                        [Environment variables template]
+├── 📄 .gitignore                          [Git ignore rules]
+│
+├── 📄 API.md                              [API documentation]
+├── 📄 ARCHITECTURE.md                     [System design & architecture]
+├── 📄 DEPLOYMENT.md                       [Deployment guide]
+├── 📄 PROJECT_SUMMARY.md                  [Project overview]
+├── 📄 PROJECT_TREE.txt                    [This file]
+├── 📄 README.md                           [Main documentation]
+├── 📄 QUICKSTART.md                       [Quick start guide]
+│
+├── 📦 Dockerfile                          [Docker container image]
+├── 📦 docker-compose.yml                  [Docker Compose setup]
+│
+├── 🐍 predict.py                          [Inference/prediction script]
+│   └─ Predictor
+│      ├─ predict()
+│      └─ predict_single()
+│
+├── 🐍 train.py                            [Main training script]
+│   └─ TrainingPipeline
+│      ├─ load_data()
+│      ├─ preprocess_features()
+│      ├─ train()
+│      ├─ evaluate()
+│      └─ run()
+│
+├── 📋 requirements.txt                    [Python dependencies]
+└── 📋 setup.py                            [Package configuration]
+
+
+═════════════════════════════════════════════════════════════════
+
+QUICK FILE REFERENCE
+====================
+
+START HERE:
+  • README.md - Overview & installation
+  • QUICKSTART.md - 5-minute setup
+
+UNDERSTAND THE DESIGN:
+  • ARCHITECTURE.md - System architecture
+  • PROJECT_TREE.txt - File structure (this file)
+
+LEARN THE CODE:
+  • src/data/loader.py - Data loading
+  • src/features/engineer.py - Feature engineering
+  • src/models/trainer.py - Model training
+  • src/utils/ - Configuration & logging
+
+TRY IT OUT:
+  • notebooks/01_EDA_Analysis.ipynb - Data exploration
+  • notebooks/02_Model_Training.ipynb - Training examples
+  • train.py - Run full training pipeline
+  • predict.py - Make predictions
+
+DEPLOY:
+  • DEPLOYMENT.md - Production deployment
+  • Dockerfile - Container setup
+  • docker-compose.yml - Full stack with MLflow
+
+CONFIGURE:
+  • config/config.yaml - Model parameters
+  • .env.example - Environment setup
+  • requirements.txt - Dependencies
+
+TEST:
+  • tests/test_data.py - Data module tests
+  • tests/test_features.py - Feature tests
+
+TRACK EXPERIMENTS:
+  • MLflow UI: mlflow ui --port 5000
+  • View results in mlruns/ directory
+
+═════════════════════════════════════════════════════════════════
+
+KEY MODULES SUMMARY
+===================
+
+┌─ src/data/ ──────────────────────────────────────┐
+│ DataLoader                                        │
+│ ├─ Pandas/Spark backend selection                │
+│ ├─ CSV loading                                    │
+│ └─ Missing value & duplicate handling             │
+│                                                   │
+│ Preprocessor                                      │
+│ ├─ Scaling (StandardScaler, MinMax, Robust)     │
+│ └─ Outlier removal (IQR, ZScore)                │
+└───────────────────────────────────────────────────┘
+
+┌─ src/features/ ───────────────────────────────────┐
+│ FeatureEngineer                                   │
+│ ├─ Polynomial features                            │
+│ ├─ Correlation-based selection                    │
+│ ├─ Statistical importance ranking                 │
+│ └─ Interaction feature creation                   │
+└───────────────────────────────────────────────────┘
+
+┌─ src/models/ ─────────────────────────────────────┐
+│ ModelTrainer (Unified Interface)                  │
+│ ├─ Classical: LogReg, SVM, RandomForest           │
+│ ├─ Boosting: XGBoost, LightGBM                    │
+│ ├─ Deep: TensorFlow/Keras                         │
+│ ├─ Metrics: Accuracy, Precision, Recall, F1      │
+│ └─ Serialization: joblib/Keras                    │
+└───────────────────────────────────────────────────┘
+
+┌─ src/utils/ ──────────────────────────────────────┐
+│ ConfigLoader                                      │
+│ ├─ YAML configuration management                  │
+│ └─ Nested config access                           │
+│                                                   │
+│ Logger                                            │
+│ ├─ INFO, WARNING, ERROR logging                   │
+│ └─ Timestamp & level prefixes                     │
+│                                                   │
+│ MLflowTracker                                     │
+│ ├─ Experiment versioning                          │
+│ ├─ Parameter logging                              │
+│ ├─ Metrics tracking                               │
+│ └─ Model artifact storage                         │
+└───────────────────────────────────────────────────┘
+
+═════════════════════════════════════════════════════════════════
+
+DATA FLOW DIAGRAM
+=================
+
+RAW DATA FILES
+    ↓
+data/raw/
+    ↓
+DataLoader.load_csv()
+    ↓
+Preprocessor
+├─ handle_missing_values()
+├─ remove_duplicates()
+└─ remove_outliers()
+    ↓
+FeatureEngineer
+├─ select_features_by_importance()
+├─ create_polynomial_features()
+└─ create_interaction_features()
+    ↓
+Train/Validation/Test Split
+    ↓
+ModelTrainer
+├─ train()
+├─ predict()
+├─ evaluate()
+└─ save_model()
+    ↓
+MLflowTracker
+├─ log_params()
+├─ log_metrics()
+└─ log_model()
+    ↓
+Serialized Artifacts
+├─ models/*.pkl (trained models)
+├─ models/scaler.pkl (preprocessing)
+└─ mlruns/ (MLflow artifacts)
+    ↓
+predict.py (Inference in Production)
+
+═════════════════════════════════════════════════════════════════
+
+You now have a complete, production-ready ML project structure!
