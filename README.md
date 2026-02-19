@@ -1,5 +1,10 @@
 # Factory Guard AI - Predictive Maintenance for Critical Manufacturing
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://docker.com)
+[![XGBoost](https://img.shields.io/badge/XGBoost-99.5%25_Accuracy-orange)](https://xgboost.readthedocs.io/)
+
 **🎯 Production System for 500 Robotic Arms | 24-Hour Failure Prediction | $5M+ Downtime Prevention**
 
 A production-grade machine learning system that predicts catastrophic equipment failures 24+ hours in advance, enabling scheduled preemptive maintenance and preventing millions in unscheduled downtime.
